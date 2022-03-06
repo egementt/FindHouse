@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">FindHouse</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mail_address">Mail address</string>
+    <string name="login">Login</string>
+    <string name="Password">Password</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="create_your_account">Create your account.</string>
+    <string name="i_m_a_owner">I\'m a OWNER</string>
+    <string name="i_m_a_student">I\'m a STUDENT</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="password">Password</string>
+    <string name="create_an_account">Create An Account</string>
+    <string name="phone_number">Phone Number</string>
+
+
+    <string-array name="universities">
+        <item>Dokuz Eylul University</item>
+        <item>Ege University</item>
+        <item>Izmir Ekonomi University</item>
+        <item>Yasar University</item>
+        <item>Izmir Yuksek Teknoloji University</item>
+    </string-array>
+</resources>
