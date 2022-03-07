@@ -1,6 +1,7 @@
 package com.example.findhouse.view
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,9 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.findhouse.R
 import com.example.findhouse.databinding.FragmentRegisterBinding
+import com.example.findhouse.model.User
 import com.example.findhouse.service.AuthService
+import com.example.findhouse.service.DatabaseService
 import com.example.findhouse.util.FirebaseResponse
 
 
@@ -21,6 +24,7 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var response: MutableLiveData<FirebaseResponse>
     private var authService: AuthService = AuthService()
+    private val databaseService = DatabaseService()
 
 
     override fun onResume() {
@@ -48,30 +52,37 @@ class RegisterFragment : Fragment() {
         }
 
         binding.button.setOnClickListener {
-            val mail = binding.etMail.text.toString()
-            val password = binding.etPassword.text.toString()
-            val response = authService.createUser(mail, password).observe(this, Observer {
-                when(it){
-                    is FirebaseResponse.Loading -> {
-                        Toast.makeText(requireContext(), "Verifying!", Toast.LENGTH_SHORT ).show()
 
+            authService.createUser(mail, password
+            /*todo(
+               User student mi yoksa owner mi tespit et ?,
+               Veriler geliyor mu kontrol et,
+               DB Service fonksiyona iyi bak.
+
+
+
+             */
+            ).observe(viewLifecycleOwner, Observer {
+                when (it) {
+                    is FirebaseResponse.Loading -> {
+                        Toast.makeText(requireContext(), "Verifying!", Toast.LENGTH_SHORT).show()
                     }
                     is FirebaseResponse.Success -> {
-                        Toast.makeText(requireContext(), "Success!", Toast.LENGTH_SHORT ).show()
+                        Toast.makeText(requireContext(), "Success!", Toast.LENGTH_SHORT).show()
                         findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+
+
                     }
-                    is FirebaseResponse.Failed ->{
-                        Toast.makeText(requireContext(), "Failed: ${(response.value as FirebaseResponse.Failed).msg}", Toast.LENGTH_SHORT ).show()
+                    is FirebaseResponse.Failed -> {
+                        Toast.makeText(
+                            requireContext(),
+                            "Failed: ${(response.value as FirebaseResponse.Failed).msg}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
 
                 }
             })
-
-            
-
-
-
-
 
         }
 

@@ -11,15 +11,16 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment2"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_loginFragment_to_userTypeSelectionFragment"
             app:destination="@id/userTypeSelectionFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.findhouse.HomeFragment"
+        android:name="com.example.findhouse.view.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment

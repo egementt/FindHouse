@@ -17,7 +17,9 @@ package com.example.findhouse.model
              "surname" to surname,
              "mailAddress" to mailAddress,
              "phoneNumber" to phoneNumber,
-             "university" to university
+             "university" to university,
+             "userType" to "student"
+
          )
      }
 }
