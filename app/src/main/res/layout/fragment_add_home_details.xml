@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btn_addHomeDetails"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="48dp"
+    android:paddingHorizontal="16dp"
+    tools:context=".view.AddHomeDetailsFragment">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/container_squaremetre"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/container_roomNumber"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:suffixText="m2"
+        app:suffixTextColor="@color/md_theme_light_onSurface">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_squaremetre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/squaremetre"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/container_roomNumber"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/container_floorNumber"
+        app:layout_constraintEnd_toEndOf="@+id/container_squaremetre"
+        app:layout_constraintStart_toStartOf="@+id/container_squaremetre"
+        app:layout_constraintTop_toBottomOf="@+id/container_squaremetre">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/et_roomNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/rooms"
+            android:inputType="none"
+            android:paddingVertical="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/container_floorNumber"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/container_duePrice"
+        app:layout_constraintEnd_toEndOf="@+id/container_roomNumber"
+        app:layout_constraintStart_toStartOf="@+id/container_roomNumber"
+        app:layout_constraintTop_toBottomOf="@+id/container_roomNumber">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_floorNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/floor_number"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/container_duePrice"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/container_heatingType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/container_floorNumber"
+        app:suffixText="TRY"
+        app:suffixTextColor="@color/md_theme_light_onSurface">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_duePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Due Price"
+            android:inputType="numberDecimal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/container_heatingType"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/container_balcony"
+        app:layout_constraintEnd_toEndOf="@+id/container_duePrice"
+        app:layout_constraintStart_toStartOf="@+id/container_duePrice"
+        app:layout_constraintTop_toBottomOf="@+id/container_duePrice">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/et_heatingType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Heating Type"
+            android:inputType="none"
+            android:paddingVertical="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/container_balcony"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="@+id/container_heatingType"
+        app:layout_constraintStart_toStartOf="@+id/container_heatingType"
+        app:layout_constraintTop_toBottomOf="@+id/container_heatingType">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/et_balcony"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Balcony"
+            android:inputType="none"
+            android:paddingVertical="16dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:text="@string/add_home_details_to_current_listing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/container_balcony"
+        app:layout_constraintStart_toStartOf="@+id/container_balcony"
+        app:layout_constraintTop_toBottomOf="@+id/container_balcony" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

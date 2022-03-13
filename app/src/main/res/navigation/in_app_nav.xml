@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/in_app_nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.findhouse.view.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment2_to_favoritesFragment2"
+            app:destination="@id/favoritesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_createListingFragment"
+            app:destination="@id/createListingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.findhouse.view.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.example.findhouse.view.FavoritesFragment"
+        android:label="Favorites">
+        <action
+            android:id="@+id/action_favoritesFragment2_to_profileFragment2"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createListingFragment"
+        android:name="com.example.findhouse.view.CreateListingFragment"
+        android:label="fragment_create_listing"
+        tools:layout="@layout/fragment_create_listing" >
+        <action
+            android:id="@+id/action_createListingFragment_to_addHomeDetailsFragment"
+            app:destination="@id/addHomeDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addHomeDetailsFragment"
+        android:name="com.example.findhouse.view.AddHomeDetailsFragment"
+        android:label="fragment_add_home_details"
+        tools:layout="@layout/fragment_add_home_details" >
+        <action
+            android:id="@+id/action_addHomeDetailsFragment_to_setLocationFragment"
+            app:destination="@id/setLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setLocationFragment"
+        android:name="com.example.findhouse.view.SetLocationFragment"
+        android:label="fragment_set_location"
+        tools:layout="@layout/fragment_set_location" />
+</navigation>
