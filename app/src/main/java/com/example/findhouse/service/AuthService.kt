@@ -13,6 +13,12 @@ class AuthService() : FirebaseService {
     private val registrationStatus: MutableLiveData<FirebaseResponse> = MutableLiveData()
     private val loginStatus: MutableLiveData<FirebaseResponse> = MutableLiveData()
 
+    fun getUserID(): String? {
+        return if (auth.currentUser != null){
+            auth.currentUser!!.uid
+        }else
+            null
+    }
 
     fun createUser(
         email: String,

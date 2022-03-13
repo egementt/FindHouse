@@ -1,11 +1,11 @@
 package com.example.findhouse.model
 
 data class House(
-    val roomNumber: NumberOfRooms = NumberOfRooms.ONE_PLUS_ONE,
+    val roomNumber: String,
     val floorNumber: Int,
     val squareMeter: Int,
     val haveBalcony: Boolean,
-    val heatingType: HeatingType = HeatingType.NONE,
+    val heatingType: String ="None",
     val duePrice: Double
 )
 

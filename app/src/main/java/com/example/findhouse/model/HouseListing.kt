@@ -1,10 +1,15 @@
 package com.example.findhouse.model
 
+import android.net.Uri
+
 data class HouseListing(
-    val ID: Int,
+    val ID: Int? = 0,
     val title: String,
-    val photos: ArrayList<String>, //from firebase
-    val price: Double,
+    val description: String,
+    val photos: List<Uri>, //from firebase
+    val price: String,
     val listingType: ListingType = ListingType.FOR_RENT,
-    val house: House,
-)
+    var house: House? = null,
+){
+
+}

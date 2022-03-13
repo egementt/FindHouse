@@ -5,7 +5,6 @@ open class User(
      val surname: String,
      val mailAddress: String,
     val phoneNumber: String,
-    val password: String? = null,
     ) {
     open fun toFirebaseDB(): HashMap<String,Any>{
         return hashMapOf(

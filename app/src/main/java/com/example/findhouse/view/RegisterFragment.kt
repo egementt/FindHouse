@@ -2,29 +2,35 @@ package com.example.findhouse.view
 
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.findhouse.R
 import com.example.findhouse.databinding.FragmentRegisterBinding
+import com.example.findhouse.model.Owner
+import com.example.findhouse.model.Student
 import com.example.findhouse.model.User
 import com.example.findhouse.service.AuthService
 import com.example.findhouse.service.DatabaseService
 import com.example.findhouse.util.FirebaseResponse
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class RegisterFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var response: MutableLiveData<FirebaseResponse>
+    private  var response: MutableLiveData<FirebaseResponse> = MutableLiveData()
+    private  var args : RegisterFragmentArgs? = null
     private var authService: AuthService = AuthService()
-    private val databaseService = DatabaseService()
+
 
 
     override fun onResume() {
@@ -42,9 +48,11 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         val bundle = arguments
-        val args = bundle?.let { RegisterFragmentArgs.fromBundle(it) }
+        args = bundle?.let { RegisterFragmentArgs.fromBundle(it) }
         if (args?.userType == "Student") {
-
+            if (!binding.dropdownMenu.isVisible){
+                binding.dropdownMenu.visibility = View.VISIBLE
+            }
         }
         if (args?.userType == "Owner") {
             binding.dropdownMenu.visibility = View.GONE
@@ -52,16 +60,19 @@ class RegisterFragment : Fragment() {
         }
 
         binding.button.setOnClickListener {
+            val currentUser = createUserModel()
+            val password = binding.etPassword.text.toString()
 
-            authService.createUser(mail, password
-            /*todo(
-               User student mi yoksa owner mi tespit et ?,
-               Veriler geliyor mu kontrol et,
-               DB Service fonksiyona iyi bak.
+            FirebaseFirestore.getInstance().collection("user").document(authService.getUserID()!!).set(currentUser.toFirebaseDB()).addOnSuccessListener {
+                Log.d("FINDHOUSE", "User added to db ! ${currentUser.toFirebaseDB()}")
+            }.addOnFailureListener {
+                Log.d("FINDHOUSE", "User failed when adding to db ! ${currentUser.toFirebaseDB()}")
 
+            }
 
+            authService.createUser(createUserModel().mailAddress, password, function = {
 
-             */
+            }
             ).observe(viewLifecycleOwner, Observer {
                 when (it) {
                     is FirebaseResponse.Loading -> {
@@ -76,7 +87,7 @@ class RegisterFragment : Fragment() {
                     is FirebaseResponse.Failed -> {
                         Toast.makeText(
                             requireContext(),
-                            "Failed: ${(response.value as FirebaseResponse.Failed).msg}",
+                            "Failed ",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -89,5 +100,19 @@ class RegisterFragment : Fragment() {
         return binding.root
 
     }
+
+
+        private fun createUserModel(): User{
+            val name = binding.etName.text.toString()
+            val surName = binding.etSurname.text.toString()
+            val mail = binding.etMail.text.toString()
+            val phoneNumber = binding.etPhoneNumber.text.toString()
+            val university = binding.autoCompleteTextView.text.toString()
+            return if (args?.userType == "Student"){
+                Student(name, surName, mail, phoneNumber, university)
+            }else {
+                Owner(name,surName,mail,phoneNumber)
+            }
+        }
 
 }

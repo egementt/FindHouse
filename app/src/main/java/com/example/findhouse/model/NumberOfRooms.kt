@@ -7,8 +7,10 @@ enum class NumberOfRooms(val numOfRoom:Int, val numOfHall: Int = 1) {
     THREE_PLUS_ONE(numOfRoom = 3);
 
     companion object{
-        override fun toString() : String{
-            return "${NumberOfRooms.values().first().numOfRoom}+${NumberOfRooms.values().first().numOfHall} "
+
+
+        fun toArray(): Array<String> {
+            return arrayOf("1+0","1+1","2+1","3+1")
         }
     }
 }
