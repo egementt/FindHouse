@@ -11,7 +11,7 @@ enum class ListingType {
             return arrayOf(toString(FOR_SALE), toString(FOR_RENT))
         }
 
-        private fun toString(listingType: ListingType): String{
+         fun toString(listingType: ListingType): String{
             return if (listingType == ListingType.FOR_RENT ){
                 "FOR RENT"
             }else{

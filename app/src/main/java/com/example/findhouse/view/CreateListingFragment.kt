@@ -19,6 +19,7 @@ import com.example.findhouse.R
 import com.example.findhouse.adapter.RecyclerViewAdapter
 import com.example.findhouse.databinding.FragmentCreateListingBinding
 import com.example.findhouse.model.*
+import com.google.firebase.Timestamp
 import java.text.NumberFormat
 import java.util.*
 
@@ -27,9 +28,7 @@ class CreateListingFragment : Fragment() {
 
     private lateinit var binding: FragmentCreateListingBinding
     private lateinit var recyclerView: RecyclerView
-    private val imageArray = arrayListOf<Uri>()
 
-    private var RESULT_CODE = 101
     override fun onResume() {
         super.onResume()
         val listingTypeAdapter =
@@ -57,12 +56,12 @@ class CreateListingFragment : Fragment() {
 
         binding.btnCreateListing.setOnClickListener {
             if (isEntitiesValid()) {
-                CurrentListing.current = HouseListing(
+                Current.houseListing = HouseListing(
                     title = binding.etTitle.text.toString(),
                     description = binding.etDescription.text.toString(),
-                    photos = imageArray,
                     price = binding.etPrice.text.toString(),
-                    listingType = ListingType.toListingType(binding.etListingType.toString())
+                    listingType = binding.etListingType.text.toString(),
+                    createdAt = Timestamp.now()
                 )
 
                 findNavController().navigate(R.id.action_createListingFragment_to_addHomeDetailsFragment)
@@ -72,7 +71,7 @@ class CreateListingFragment : Fragment() {
             }
         }
 
-        binding.etPrice.setOnFocusChangeListener { v, hasFocus ->
+        binding.etPrice.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
                 val currentText = binding.etPrice.text.toString()
                 try {
@@ -92,7 +91,7 @@ class CreateListingFragment : Fragment() {
 
 
     private fun isEntitiesValid(): Boolean {
-        return imageArray.isNotEmpty() && !binding.etTitle.text.isNullOrEmpty() && !binding.etDescription.text.isNullOrEmpty() && !binding.etListingType.text.isNullOrEmpty() && !binding.etPrice.text.isNullOrEmpty()
+        return Current.photoList.isNotEmpty() && !binding.etTitle.text.isNullOrEmpty() && !binding.etDescription.text.isNullOrEmpty() && !binding.etListingType.text.isNullOrEmpty() && !binding.etPrice.text.isNullOrEmpty()
     }
 
     @SuppressLint("SetTextI18n")
@@ -107,9 +106,9 @@ class CreateListingFragment : Fragment() {
                 binding.twAddPhotos.text = "$count photos selected."
 
                 for (i in 0 until count) {
-                    imageArray.add(data.clipData!!.getItemAt(i).uri)
+                    Current.photoList.add(data.clipData!!.getItemAt(i).uri.toString())
                 }
-                val adapter = RecyclerViewAdapter(imageArray)
+                val adapter = RecyclerViewAdapter(Current.photoList)
                 binding.rwAddPhotos.adapter = adapter
             }
         }

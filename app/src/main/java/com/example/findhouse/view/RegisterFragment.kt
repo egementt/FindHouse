@@ -1,7 +1,6 @@
 package com.example.findhouse.view
 
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +14,11 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.findhouse.R
 import com.example.findhouse.databinding.FragmentRegisterBinding
+import com.example.findhouse.model.Current
 import com.example.findhouse.model.Owner
 import com.example.findhouse.model.Student
 import com.example.findhouse.model.User
 import com.example.findhouse.service.AuthService
-import com.example.findhouse.service.DatabaseService
 import com.example.findhouse.util.FirebaseResponse
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -60,20 +59,13 @@ class RegisterFragment : Fragment() {
         }
 
         binding.button.setOnClickListener {
-            val currentUser = createUserModel()
+           Current.user = createUserModel()
             val password = binding.etPassword.text.toString()
 
-            FirebaseFirestore.getInstance().collection("user").document(authService.getUserID()!!).set(currentUser.toFirebaseDB()).addOnSuccessListener {
-                Log.d("FINDHOUSE", "User added to db ! ${currentUser.toFirebaseDB()}")
-            }.addOnFailureListener {
-                Log.d("FINDHOUSE", "User failed when adding to db ! ${currentUser.toFirebaseDB()}")
 
-            }
 
-            authService.createUser(createUserModel().mailAddress, password, function = {
-
-            }
-            ).observe(viewLifecycleOwner, Observer {
+            authService.createUser(createUserModel().mailAddress, password)
+            .observe(viewLifecycleOwner, Observer {
                 when (it) {
                     is FirebaseResponse.Loading -> {
                         Toast.makeText(requireContext(), "Verifying!", Toast.LENGTH_SHORT).show()

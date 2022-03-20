@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.findhouse.R
 import com.example.findhouse.databinding.FragmentAddHomeDetailsBinding
-import com.example.findhouse.model.CurrentListing
+import com.example.findhouse.model.Current
 import com.example.findhouse.model.HeatingType
 import com.example.findhouse.model.House
 import com.example.findhouse.model.NumberOfRooms
@@ -58,7 +58,7 @@ class AddHomeDetailsFragment : Fragment() {
         binding.button2.setOnClickListener {
             if (isValid()){
 
-                CurrentListing.current?.house = House(
+               Current.houseListing.house = House(
                     roomNumber = binding.etRoomNumber.text.toString(),
                     floorNumber = binding.etFloorNumber.text.toString().toInt(),
                     squareMeter = binding.etFloorNumber.text.toString().toInt(),
@@ -67,7 +67,7 @@ class AddHomeDetailsFragment : Fragment() {
                     duePrice =  binding.etDuePrice.text.toString().toDouble()
                 )
 
-                Log.d("APP_DEBUG", "Current house: ${CurrentListing.current.toString()}")
+                Log.d("APP_DEBUG", "Current house: ${Current.houseListing.house}")
                 findNavController().navigate(R.id.action_addHomeDetailsFragment_to_setLocationFragment)
 
             }else{

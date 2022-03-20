@@ -1,20 +1,20 @@
 package com.example.findhouse.adapter
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.findhouse.R
 
-class RecyclerViewAdapter(val itemList: ArrayList<Uri>) : RecyclerView.Adapter<RecyclerViewAdapter.ItemListViewHolder>() {
+class RecyclerViewAdapter(private val itemList: ArrayList<String>) : RecyclerView.Adapter<RecyclerViewAdapter.ItemListViewHolder>() {
 
     class ItemListViewHolder(private val imageView: View) : RecyclerView.ViewHolder(imageView) {
 
-        fun bindItems(imageUri: Uri){
+        fun bindItems(imageUri: String){
             val img = imageView.findViewById<ImageView>(R.id.imageListItem)
-            img.setImageURI(imageUri)
+            img.setImageURI(imageUri.toUri())
         }
 
     }

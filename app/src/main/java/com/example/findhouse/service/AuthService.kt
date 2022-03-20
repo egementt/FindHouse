@@ -1,9 +1,13 @@
 package com.example.findhouse.service
 
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.findhouse.model.Current
 import com.example.findhouse.util.FirebaseResponse
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class AuthService() : FirebaseService {
@@ -22,18 +26,22 @@ class AuthService() : FirebaseService {
 
     fun createUser(
         email: String,
-        password: String,
-        function: (() -> Unit?)? = null
-    ): MutableLiveData<FirebaseResponse> {
+        password: String): MutableLiveData<FirebaseResponse> {
         registrationStatus.value = FirebaseResponse.Loading()
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                registrationStatus.value = FirebaseResponse.Success(auth.currentUser!!).also {
-                    function
-                }
-
-            }
-        }.addOnFailureListener { e ->
+                registrationStatus.value = FirebaseResponse.Success(Current.user!!).apply {
+                    FirebaseFirestore.getInstance().collection("user")
+                        .document(getUserID()!!).set(Current.user!!.toFirebaseDB())
+                        .addOnSuccessListener {
+                            Log.d("FINDHOUSE", "User added to db !")
+                        }.addOnFailureListener {
+                            Log.d(
+                                "FINDHOUSE",
+                                "User failed when adding to db !"
+                            )
+                        }  }
+        }}.addOnFailureListener { e ->
             registrationStatus.value = FirebaseResponse.Failed(e.localizedMessage!!)
         }
         return registrationStatus
