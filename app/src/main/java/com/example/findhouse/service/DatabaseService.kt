@@ -13,7 +13,6 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 
 
 class DatabaseService() {

@@ -10,7 +10,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentView"
-        android:name="com.example.findhouse.view.MapsFragment"
+        android:name="com.example.findhouse.view.deneme"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="24dp"
@@ -90,5 +90,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_deneme" />
 </androidx.constraintlayout.widget.ConstraintLayout>

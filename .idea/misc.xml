@@ -24,7 +24,12 @@
         <entry key="..\:/Users/egeme/AndroidStudioProjects/ComposeBootcamp2022/FindHouse/app/src/main/res/menu/app_bar_menu.xml" value="0.3487179487179487" />
         <entry key="..\:/Users/egeme/AndroidStudioProjects/ComposeBootcamp2022/FindHouse/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.3541666666666667" />
         <entry key="..\:/Users/egeme/AndroidStudioProjects/ComposeBootcamp2022/FindHouse/app/src/main/res/menu/nav_drawer_menu.xml" value="0.24537037037037038" />
+        <entry key="app/src/main/res/layout/fragment_deneme.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_maps.xml" value="0.2749094202898551" />
+        <entry key="app/src/main/res/layout/fragment_set_location.xml" value="0.18177083333333333" />
+        <entry key="app/src/main/res/layout/new_listing_item.xml" value="0.35625" />
       </map>
     </option>
   </component>
