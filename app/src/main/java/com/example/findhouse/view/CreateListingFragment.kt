@@ -3,23 +3,22 @@ package com.example.findhouse.view
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ImageSwitcher
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.findhouse.R
-import com.example.findhouse.adapter.RecyclerViewAdapter
+import com.example.findhouse.adapter.ImageSliderRecyclerViewAdapter
 import com.example.findhouse.databinding.FragmentCreateListingBinding
 import com.example.findhouse.model.*
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.FirebaseAuth
 import java.text.NumberFormat
 import java.util.*
 
@@ -48,6 +47,7 @@ class CreateListingFragment : Fragment() {
         binding.cwAddPhoto.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
+            intent.putExtra(Intent.ACTION_PICK, true)
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Image(s)"), 1)
@@ -61,7 +61,8 @@ class CreateListingFragment : Fragment() {
                     description = binding.etDescription.text.toString(),
                     price = binding.etPrice.text.toString(),
                     listingType = binding.etListingType.text.toString(),
-                    createdAt = Timestamp.now()
+                    createdAt = Timestamp.now(),
+                    authorID = FirebaseAuth.getInstance().currentUser!!.uid
                 )
 
                 findNavController().navigate(R.id.action_createListingFragment_to_addHomeDetailsFragment)
@@ -108,7 +109,7 @@ class CreateListingFragment : Fragment() {
                 for (i in 0 until count) {
                     Current.photoList.add(data.clipData!!.getItemAt(i).uri.toString())
                 }
-                val adapter = RecyclerViewAdapter(Current.photoList)
+                val adapter = ImageSliderRecyclerViewAdapter(Current.photoList, true)
                 binding.rwAddPhotos.adapter = adapter
             }
         }

@@ -35,7 +35,7 @@ class LoginFragment : Fragment() {
                     }
                     is FirebaseResponse.Success ->{
                         Toast.makeText(requireContext(), "Success!", Toast.LENGTH_SHORT).show()
-                        findNavController().navigate(R.id.action_loginFragment_to_inAppActivity)
+                        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToInAppActivity())
 
                     }
                     is FirebaseResponse.Failed ->{

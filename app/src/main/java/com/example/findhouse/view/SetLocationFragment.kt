@@ -49,7 +49,7 @@ class SetLocationFragment : Fragment() {
                 when(uploadResponse) {
                         is FirebaseResponse.Success ->{
                             storageService.getPhotosByListingID(dbRef.id).observe(viewLifecycleOwner, Observer { uriResponse ->
-
+                            Current.houseListing.university = Current.universities.find { it.name == binding.actUniversity.text.toString() }!!
                                 when(uriResponse){
                                     is FirebaseResponse.Success -> {
                                         Toast.makeText(requireContext(), "Uri(s) received", Toast.LENGTH_SHORT).show()
@@ -96,7 +96,7 @@ class SetLocationFragment : Fragment() {
     }
 
 
-    fun clearCurrents(){
+    private fun clearCurrents(){
         Current.houseListing = HouseListing()
         Current.photoList = arrayListOf()
     }

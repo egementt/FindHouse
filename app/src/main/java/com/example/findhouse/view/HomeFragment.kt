@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -15,10 +17,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.findhouse.InAppActivity
 import com.example.findhouse.R
 import com.example.findhouse.adapter.NewListingsRecyclerViewAdapter
+import com.example.findhouse.adapter.UniversitiesRecyclerViewAdapter
 import com.example.findhouse.databinding.FragmentHomeBinding
-import com.example.findhouse.model.HouseListing
+import com.example.findhouse.model.Current
+import com.example.findhouse.model.Owner
+import com.example.findhouse.model.Student
+import com.example.findhouse.model.User
 import com.example.findhouse.service.DatabaseService
 import com.example.findhouse.util.FirebaseResponse
+import com.example.findhouse.model.HouseListing as HouseListing
 
 
 class HomeFragment : Fragment() {
@@ -34,6 +41,18 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
+        when (Current.user){
+            is Student ->
+            binding.fabCreateList.visibility = View.GONE
+            is Owner -> {
+                if (!binding.fabCreateList.isVisible){
+                    binding.fabCreateList.visibility = View.VISIBLE
+                }
+        }
+
+        }
+
+
 
         listings.observe(viewLifecycleOwner, Observer { firebaseResponse ->
             when (firebaseResponse) {
@@ -42,12 +61,10 @@ class HomeFragment : Fragment() {
                 }
                 is FirebaseResponse.Success -> {
                     val list = firebaseResponse.data as List<*>
+                    Current.allListings = list as List<HouseListing>
                     Log.d("deneme", list.toString())
-                    binding.newRecyclerView.let { rw ->
-                        rw.layoutManager =    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                        val adapter = NewListingsRecyclerViewAdapter(list as ArrayList<HouseListing>, this)
-                        rw.adapter = adapter
-                    }
+                    setupUniversitiesRW()
+                    setupRecentlyAddedRW(list as ArrayList<HouseListing>)
 
                 }
                 is FirebaseResponse.Failed -> {
@@ -60,6 +77,36 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_homeFragment_to_createListingFragment)
         }
         return binding.root
+    }
+
+    private fun setupUniversitiesRW(){
+        binding.rwUniversities.let { rw->
+            rw.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
+            val adapter = UniversitiesRecyclerViewAdapter()
+            rw.adapter = adapter
+            adapter.setOnItemClickListener(object : UniversitiesRecyclerViewAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val bundle = bundleOf("universityName" to Current.universities[position].name)
+                    findNavController().navigate(R.id.action_homeFragment_to_listFilterFragment, bundle)
+                }
+            })
+
+        }
+    }
+
+    private fun setupRecentlyAddedRW(arrayList: ArrayList<HouseListing>){
+        binding.newRecyclerView.let { rw ->
+            rw.layoutManager =  LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            val adapter = NewListingsRecyclerViewAdapter( arrayList)
+            rw.adapter = adapter
+            adapter.setOnItemClickListener(object: NewListingsRecyclerViewAdapter.onItemClickListener{
+                override fun onItemClick(position: Int) {
+                    val bundle = bundleOf("listPosition" to position)
+                    findNavController().navigate(R.id.action_homeFragment_to_listDetailViewFragment, bundle)
+                }
+            })
+
+        }
     }
 
 

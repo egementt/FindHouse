@@ -61,10 +61,10 @@ class AddHomeDetailsFragment : Fragment() {
                Current.houseListing.house = House(
                     roomNumber = binding.etRoomNumber.text.toString(),
                     floorNumber = binding.etFloorNumber.text.toString().toInt(),
-                    squareMeter = binding.etFloorNumber.text.toString().toInt(),
+                    squareMetre = binding.etSquaremetre.text.toString().toInt(),
                     haveBalcony = binding.etBalcony.text.toString() == "true",
                     heatingType = binding.etHeatingType.text.toString(),
-                    duePrice =  binding.etDuePrice.text.toString().toDouble()
+                    duePrice =  binding.etDuePrice.text.toString().toDouble(),
                 )
 
                 Log.d("APP_DEBUG", "Current house: ${Current.houseListing.house}")

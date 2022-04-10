@@ -1,11 +1,11 @@
 package com.example.findhouse.model
 
  class Student(
-     name: String,
-     surname: String,
-     mailAddress: String,
-     phoneNumber: String,
-     private val university: String
+     name: String="",
+     surname: String="",
+     mailAddress: String="",
+     phoneNumber: String="",
+      val university: University= University()
 
 ) : User(name, surname, mailAddress, phoneNumber){
 

@@ -16,12 +16,25 @@
         <action
             android:id="@+id/action_homeFragment_to_createListingFragment"
             app:destination="@id/createListingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listFilterFragment"
+            app:destination="@id/listFilterFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_listDetailViewFragment"
+            app:destination="@id/listDetailViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.findhouse.view.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment2"
+            app:destination="@id/loginFragment2"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/in_app_nav"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.example.findhouse.view.FavoritesFragment"
@@ -56,5 +69,30 @@
         <action
             android:id="@+id/action_setLocationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment2"
+        android:name="com.example.findhouse.view.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/listFilterFragment"
+        android:name="com.example.findhouse.view.ListFilterFragment"
+        android:label="fragment_list_filter"
+        tools:layout="@layout/fragment_list_filter" >
+        <argument
+            android:name="universityName"
+            app:argType="string"
+            android:defaultValue="Dokuz Eylul University" />
+    </fragment>
+    <fragment
+        android:id="@+id/listDetailViewFragment"
+        android:name="com.example.findhouse.view.ListDetailViewFragment"
+        android:label="list_detail_fragment"
+        tools:layout="@layout/list_detail_fragment" >
+        <argument
+            android:name="listPosition"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

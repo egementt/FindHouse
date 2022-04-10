@@ -34,8 +34,8 @@ class RegisterFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val universities = resources.getStringArray(R.array.universities)
-        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, universities)
+
+        val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, Current.listOfUniversityNames())
         binding.autoCompleteTextView.setAdapter(adapter)
 
     }
@@ -101,7 +101,7 @@ class RegisterFragment : Fragment() {
             val phoneNumber = binding.etPhoneNumber.text.toString()
             val university = binding.autoCompleteTextView.text.toString()
             return if (args?.userType == "Student"){
-                Student(name, surName, mail, phoneNumber, university)
+                Student(name, surName, mail, phoneNumber, Current.universities.find { it.name == university }!!)
             }else {
                 Owner(name,surName,mail,phoneNumber)
             }

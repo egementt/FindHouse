@@ -26,6 +26,7 @@
     <string name="price">Price</string>
     <string name="add_home_details_to_current_listing">Add Home Details to Current Listing</string>
     <string name="description">Description</string>
+    <string name="call_owner">Call Owner</string>
 
 
     <string-array name="universities">
