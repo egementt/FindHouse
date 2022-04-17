@@ -15,10 +15,7 @@
             app:destination="@id/userTypeSelectionFragment" />
         <action
             android:id="@+id/action_loginFragment_to_inAppActivity"
-            app:destination="@id/inAppActivity"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:destination="@id/inAppActivity" />
     </fragment>
     <fragment
         android:id="@+id/userTypeSelectionFragment"

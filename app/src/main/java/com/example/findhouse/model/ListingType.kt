@@ -8,18 +8,18 @@ enum class ListingType {
     companion object{
 
         fun toArray(): Array<String>{
-            return arrayOf(toString(FOR_SALE), toString(FOR_RENT))
+            return arrayOf(fromListingTypeToString(FOR_SALE), fromListingTypeToString(FOR_RENT))
         }
 
-         fun toString(listingType: ListingType): String{
-            return if (listingType == ListingType.FOR_RENT ){
+         fun fromListingTypeToString(listingType: ListingType): String{
+            return if (listingType == FOR_RENT ){
                 "FOR RENT"
             }else{
                 "FOR SALE"
             }
         }
 
-        fun toListingType(string: String): ListingType{
+        fun fromStringToListingType(string: String): ListingType{
             return if (string == "FOR RENT"){
                 FOR_RENT
             }else

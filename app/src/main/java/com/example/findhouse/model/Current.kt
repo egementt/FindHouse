@@ -5,10 +5,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.firestore.GeoPoint
 
 object Current {
+
     var houseListing : HouseListing = HouseListing()
     var user: User? = null
     var photoList: ArrayList<String> = arrayListOf()
     var allListings = emptyList<HouseListing>()
+    var favoriteListings = mutableListOf<HouseListing>()
 
     var universities : List<University> = listOf(
         University("Yasar University", GeoPoint(38.45484117354883, 27.202320788172972), R.drawable.yasar_uni),
@@ -17,6 +19,14 @@ object Current {
         University("Demokrasi University", GeoPoint(38.394111654214704, 27.073764879489634), R.drawable.izmir_demokrasi_universitesi),
         University("Ege University", GeoPoint(38.45412707921372, 27.212790684442023), R.drawable.ege_uni)
     )
+
+    fun getUniversityByName(name: String): University{
+      val university = universities.find {
+            it.name == name
+        }?: universities[0]
+
+        return university
+    }
 
     fun listOfUniversityNames() : List<String> {
         val universityNames = emptyList<String>().toMutableList()

@@ -1,8 +1,6 @@
 package com.example.findhouse.model
 
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.firebase.Timestamp
 
 
@@ -13,7 +11,7 @@ data class HouseListing(
     val authorID : String = "",
     var photos: MutableList<String> = mutableListOf<String>(), //from firebase
     val price: String = "",
-    val listingType: String = ListingType.toString(ListingType.FOR_SALE),
+    val listingType: String = ListingType.fromListingTypeToString(ListingType.FOR_SALE),
     var house: House? = House(),
     var createdAt : Timestamp = Timestamp.now(),
     var university: University= University(),

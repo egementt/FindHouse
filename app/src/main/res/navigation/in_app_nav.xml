@@ -27,12 +27,12 @@
         android:id="@+id/profileFragment"
         android:name="com.example.findhouse.view.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_loginFragment2"
-            app:destination="@id/loginFragment2"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/in_app_nav"
+            android:id="@+id/action_profileFragment_to_mainActivity"
+            app:destination="@id/mainActivity"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/mainActivity"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -42,12 +42,15 @@
         <action
             android:id="@+id/action_favoritesFragment2_to_profileFragment2"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_favoritesFragment_to_listDetailViewFragment"
+            app:destination="@id/listDetailViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/createListingFragment"
         android:name="com.example.findhouse.view.CreateListingFragment"
         android:label="fragment_create_listing"
-        tools:layout="@layout/fragment_create_listing" >
+        tools:layout="@layout/fragment_create_listing">
         <action
             android:id="@+id/action_createListingFragment_to_addHomeDetailsFragment"
             app:destination="@id/addHomeDetailsFragment" />
@@ -56,7 +59,7 @@
         android:id="@+id/addHomeDetailsFragment"
         android:name="com.example.findhouse.view.AddHomeDetailsFragment"
         android:label="fragment_add_home_details"
-        tools:layout="@layout/fragment_add_home_details" >
+        tools:layout="@layout/fragment_add_home_details">
         <action
             android:id="@+id/action_addHomeDetailsFragment_to_setLocationFragment"
             app:destination="@id/setLocationFragment" />
@@ -65,34 +68,37 @@
         android:id="@+id/setLocationFragment"
         android:name="com.example.findhouse.view.SetLocationFragment"
         android:label="fragment_set_location"
-        tools:layout="@layout/fragment_set_location" >
+        tools:layout="@layout/fragment_set_location">
         <action
             android:id="@+id/action_setLocationFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment2"
-        android:name="com.example.findhouse.view.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
-    <fragment
         android:id="@+id/listFilterFragment"
         android:name="com.example.findhouse.view.ListFilterFragment"
         android:label="fragment_list_filter"
-        tools:layout="@layout/fragment_list_filter" >
+        tools:layout="@layout/fragment_list_filter">
         <argument
             android:name="universityName"
-            app:argType="string"
-            android:defaultValue="Dokuz Eylul University" />
+            android:defaultValue="Dokuz Eylul University"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_listFilterFragment_to_listDetailViewFragment"
+            app:destination="@id/listDetailViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/listDetailViewFragment"
         android:name="com.example.findhouse.view.ListDetailViewFragment"
         android:label="list_detail_fragment"
-        tools:layout="@layout/list_detail_fragment" >
+        tools:layout="@layout/list_detail_fragment">
         <argument
             android:name="listPosition"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.findhouse.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
 </navigation>

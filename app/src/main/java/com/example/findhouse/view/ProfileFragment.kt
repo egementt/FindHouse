@@ -42,9 +42,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            Current.user = null
-            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToLoginFragment2())
+
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToMainActivity())
+            requireActivity().finish()
         }
 
 
