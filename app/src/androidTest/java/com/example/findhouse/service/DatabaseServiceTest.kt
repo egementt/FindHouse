@@ -17,7 +17,7 @@ class DatabaseServiceTest {
     }
 
     @Test
-    fun getAllListings(){
+    fun getAllListingsTest(){
         firestore.collection("listings").document().get().addOnSuccessListener {
             assertTrue(it.data.toString(), it.exists()) }
         }

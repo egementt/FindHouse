@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_homeFragment_to_listDetailViewFragment"
             app:destination="@id/listDetailViewFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_allListingsFragment"
+            app:destination="@id/allListingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -85,6 +88,9 @@
         <action
             android:id="@+id/action_listFilterFragment_to_listDetailViewFragment"
             app:destination="@id/listDetailViewFragment" />
+        <action
+            android:id="@+id/action_listFilterFragment_to_listDetailViewFragment2"
+            app:destination="@id/listDetailViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/listDetailViewFragment"
@@ -101,4 +107,13 @@
         android:name="com.example.findhouse.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/allListingsFragment"
+        android:name="com.example.findhouse.AllListingsFragment"
+        android:label="fragment_all_listings"
+        tools:layout="@layout/fragment_all_listings" >
+        <action
+            android:id="@+id/action_allListingsFragment_to_listDetailViewFragment"
+            app:destination="@id/listDetailViewFragment" />
+    </fragment>
 </navigation>

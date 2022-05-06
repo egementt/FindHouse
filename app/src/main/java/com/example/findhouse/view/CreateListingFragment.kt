@@ -77,7 +77,7 @@ class CreateListingFragment : Fragment() {
                 val currentText = binding.etPrice.text.toString()
                 try {
                     NumberFormat.getCurrencyInstance().apply {
-                        currency = Currency.getInstance("TRY")
+                        currency = Currency.getInstance("try")
                         this.maximumFractionDigits = 0
                         binding.etPrice.setText(this.format(currentText.toDouble()).removePrefix("TRY"))
                     }

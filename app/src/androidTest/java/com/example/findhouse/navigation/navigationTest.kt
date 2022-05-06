@@ -56,7 +56,7 @@ class NavigationTest {
     @Test
     fun testNavigationLoginToHomeScreen(){
 
-         val fragment = launchFragmentInContainer(themeResId = R.style.Theme_FindHouse) {
+          launchFragmentInContainer(themeResId = R.style.Theme_FindHouse) {
             LoginFragment().also { loginFragment ->
                 loginFragment.viewLifecycleOwnerLiveData.observeForever{ observer->
                     if (observer != null){

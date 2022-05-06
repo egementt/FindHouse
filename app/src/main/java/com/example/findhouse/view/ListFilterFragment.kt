@@ -68,7 +68,7 @@ class ListFilterFragment : Fragment() {
 
                         override fun onQueryTextChange(newText: String?): Boolean {
                             if (newText != null) {
-                                rwAdapter.filterList(newText)
+                                rwAdapter.searchList(newText)
                                 Log.d("filter_Debug", "search running $newText")
                             }
                             return false

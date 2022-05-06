@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
                 }
                 is FirebaseResponse.Success -> {
                     val list = firebaseResponse.data as List<*>
-                    Current.allListings = list as List<HouseListing>
+                    Current.allListings = (list as List<HouseListing>).shuffled()
                     Log.d("deneme", list.toString())
 
                     setupUniversitiesRW()
@@ -75,6 +75,9 @@ class HomeFragment : Fragment() {
             }
         })
 
+        binding.btnAllListings.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_allListingsFragment)
+        }
         binding.fabCreateList.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_createListingFragment)
         }
