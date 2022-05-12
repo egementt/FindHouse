@@ -31,5 +31,11 @@ class FilterHelper {
         fun filterBySquareMeter(list: List<HouseListing>, squareMeter: Int): List<HouseListing> {
             return list.filter { x -> x.house!!.squareMetre <= squareMeter }
         }
+
+        fun filterByUniversity(newListing: List<HouseListing>, selectedUniversityName: String): List<HouseListing> {
+            return newListing.filter { x ->
+                x.university.name == selectedUniversityName
+            }
+        }
     }
 }

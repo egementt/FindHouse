@@ -1,8 +1,6 @@
 package com.example.findhouse.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +13,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.findhouse.R
-import com.example.findhouse.model.Current
 import com.example.findhouse.model.HouseListing
 import com.example.findhouse.util.Converter
 import com.example.findhouse.util.FilterHelper
 import com.example.findhouse.util.OrderHelper
-import java.util.*
 import kotlin.collections.ArrayList
 
 class FilteredListingsRecyclerViewAdapter(private val filteredList: ArrayList<HouseListing>)  :
@@ -121,10 +117,17 @@ class FilteredListingsRecyclerViewAdapter(private val filteredList: ArrayList<Ho
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun filterListBy(listingType : String= "", min: String, max: String, squareMeter: Int ){
+    fun filterListBy(
+        listingType: String = "",
+        min: String,
+        max: String,
+        squareMeter: Int,
+        selectedUniversityName: String
+    ){
         var newListing = FilterHelper.filterByListingType(listing, listingType)
            newListing =  FilterHelper.filterByPriceRange(newListing, min, max)
             newListing = FilterHelper.filterBySquareMeter(newListing, squareMeter)
+            newListing = FilterHelper.filterByUniversity(newListing, selectedUniversityName)
         listing = Converter.listToArrayList(newListing)
         notifyDataSetChanged()
 

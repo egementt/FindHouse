@@ -113,8 +113,8 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
                 android:checked="true"
+                android:paddingHorizontal="10dp"
                 android:text="For Rent"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -140,28 +140,52 @@
 
         </com.google.android.material.chip.ChipGroup>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filterUniversityLayout"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/slider_m2"
+            app:layout_constraintHorizontal_bias="0.0"
+
+            app:layout_constraintStart_toStartOf="@+id/slider_m2"
+            app:layout_constraintTop_toBottomOf="@+id/slider_m2"
+            app:startIconDrawable="@drawable/ic_location">
+
+            <AutoCompleteTextView
+                android:id="@+id/act_university"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Nearest University"
+                android:inputType="none"
+                android:paddingVertical="16dp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/btn_apply_filter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             android:text="Apply Filter"
             app:layout_constraintEnd_toEndOf="@+id/slider_m2"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/slider_m2"
-            app:layout_constraintTop_toBottomOf="@+id/slider_m2" />
+            app:layout_constraintTop_toBottomOf="@+id/filterUniversityLayout" />
 
         <Button
             android:id="@+id/btn_clear_filter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:backgroundTint="#E53935"
             android:text="Clear Filter"
             app:layout_constraintEnd_toEndOf="@+id/btn_apply_filter"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/btn_apply_filter"
             app:layout_constraintTop_toBottomOf="@+id/btn_apply_filter" />
-
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

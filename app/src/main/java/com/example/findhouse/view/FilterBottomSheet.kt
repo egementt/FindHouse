@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.example.findhouse.R
 import com.example.findhouse.adapter.FilteredListingsRecyclerViewAdapter
 import com.example.findhouse.databinding.BottomSheetFilterBinding
+import com.example.findhouse.model.Current
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlin.math.roundToInt
 
@@ -19,6 +21,12 @@ class FilterBottomSheet(val adapter: FilteredListingsRecyclerViewAdapter) : Bott
         const val TAG = "ModalBottomSheet"
     }
 
+    override fun onResume() {
+        super.onResume()
+        val actAdapter = ArrayAdapter(requireContext(),R.layout.dropdown_item, Current.listOfUniversityNames())
+        binding.actUniversity.setAdapter(actAdapter)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,9 +35,11 @@ class FilterBottomSheet(val adapter: FilteredListingsRecyclerViewAdapter) : Bott
 
         binding = BottomSheetFilterBinding.inflate(layoutInflater, container, false)
 
+
         binding.btnApplyFilter.setOnClickListener {
             adapter.clearList()
-            adapter.filterListBy(getListingTypeFromChip(), getMin(), getMax(), getSquareMeter() )
+            val selectedUniversityName = binding.actUniversity.text.toString()
+            adapter.filterListBy(getListingTypeFromChip(), getMin(), getMax(), getSquareMeter(), selectedUniversityName)
         }
 
         binding.btnClearFilter.setOnClickListener { adapter.clearList() }

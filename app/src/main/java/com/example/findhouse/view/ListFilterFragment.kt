@@ -91,9 +91,12 @@ class ListFilterFragment : Fragment() {
                     binding.pbListFilter.visibility = View.INVISIBLE
                     val list = response.data as ArrayList<HouseListing>
                     if (list.isNullOrEmpty()){
-                        Log.d("debug", "list is null ??")
+                        binding.layoutNoFilter.visibility = View.VISIBLE
+                        binding.imageView2.visibility = View.VISIBLE
+                        binding.filterEmptyTw.visibility = View.VISIBLE
                     }else{
                         Log.d("debugapp", list.toString())
+                        binding.layoutNoFilter.visibility = View.INVISIBLE
                         binding.rwFilteredList.let { rw ->
                             rw.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false )
                             rwAdapter = FilteredListingsRecyclerViewAdapter(list)
