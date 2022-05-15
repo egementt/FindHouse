@@ -1,6 +1,6 @@
 package com.example.findhouse.view
 
-import android.app.Application
+
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -14,7 +14,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.findhouse.InAppActivity
 import com.example.findhouse.R
 import com.example.findhouse.adapter.NewListingsRecyclerViewAdapter
 import com.example.findhouse.adapter.UniversitiesRecyclerViewAdapter
@@ -61,12 +60,12 @@ class HomeFragment : Fragment() {
                 }
                 is FirebaseResponse.Success -> {
                     val list = firebaseResponse.data as List<*>
-                    Current.allListings = (list as List<HouseListing>).shuffled()
+                    Current.allListings = (list as List<HouseListing>)
                     Log.d("deneme", list.toString())
 
                     setupUniversitiesRW()
                     setupRecentlyAddedRW(list as ArrayList<HouseListing>)
-                    setupForRentRW(list)
+                    setupForRentRW(list.filter { houseListing: HouseListing -> houseListing.listingType == "FOR RENT" } as ArrayList<HouseListing>)
 
                 }
                 is FirebaseResponse.Failed -> {
@@ -131,7 +130,6 @@ class HomeFragment : Fragment() {
             rw.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             val adapter = NewListingsRecyclerViewAdapter(arrayList)
-            rw.adapter = adapter
             adapter.setOnItemClickListener(object :
                 NewListingsRecyclerViewAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
@@ -142,7 +140,7 @@ class HomeFragment : Fragment() {
                     )
                 }
             })
-
+            rw.adapter = adapter
         }
     }
 
@@ -150,20 +148,21 @@ class HomeFragment : Fragment() {
         binding.rwForRent.let { rw ->
             rw.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            val adapter =
-                NewListingsRecyclerViewAdapter(arrayList.filter { houseListing: HouseListing -> houseListing.listingType == "FOR RENT" } as ArrayList<HouseListing>)
-            rw.adapter = adapter
+            val adapter = NewListingsRecyclerViewAdapter(arrayList)
+
             adapter.setOnItemClickListener(object :
                 NewListingsRecyclerViewAdapter.onItemClickListener {
                 override fun onItemClick(position: Int) {
-                    val bundle = bundleOf("listPosition" to position)
+                    val findOriginalIndex = Current.allListings.indexOf( arrayList[position] )
+                    val bundle = bundleOf("listPosition" to findOriginalIndex)
+
                     findNavController().navigate(
                         R.id.action_homeFragment_to_listDetailViewFragment,
                         bundle
                     )
                 }
             })
-
+            rw.adapter = adapter
         }
     }
 

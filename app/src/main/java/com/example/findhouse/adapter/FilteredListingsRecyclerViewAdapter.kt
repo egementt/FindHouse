@@ -22,18 +22,18 @@ import kotlin.collections.ArrayList
 class FilteredListingsRecyclerViewAdapter(private val filteredList: ArrayList<HouseListing>)  :
     RecyclerView.Adapter<FilteredListingsRecyclerViewAdapter.FilteredListViewHolder>() {
 
-    private lateinit var mListener: NewListingsRecyclerViewAdapter.onItemClickListener
-    private var listing = filteredList
+    private lateinit var mListener: onItemClickListener
+     var listing = filteredList
 
     interface onItemClickListener {
         fun onItemClick(position: Int)
     }
 
-    fun setOnItemClickListener(listener: NewListingsRecyclerViewAdapter.onItemClickListener) {
+    fun setOnItemClickListener(listener: onItemClickListener) {
         mListener = listener
     }
 
-    class FilteredListViewHolder(view:View, listener: NewListingsRecyclerViewAdapter.onItemClickListener) : RecyclerView.ViewHolder(view) {
+    class FilteredListViewHolder(view:View, listener: onItemClickListener) : RecyclerView.ViewHolder(view) {
 
         init {
 

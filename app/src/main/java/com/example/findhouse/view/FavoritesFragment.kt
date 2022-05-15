@@ -32,7 +32,7 @@ class FavoritesFragment : Fragment() {
         binding.rwFavorites.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         val adapter = FilteredListingsRecyclerViewAdapter(Current.favoriteListings as ArrayList<HouseListing>)
-        adapter.setOnItemClickListener(object: NewListingsRecyclerViewAdapter.onItemClickListener{
+        adapter.setOnItemClickListener(object: FilteredListingsRecyclerViewAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
                 val findOriginalIndex = Current.allListings.indexOf(Current.favoriteListings[position] )
                 val bundle = bundleOf("listPosition" to findOriginalIndex)

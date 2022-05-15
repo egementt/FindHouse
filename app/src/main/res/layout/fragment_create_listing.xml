@@ -138,7 +138,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container_price"
-        app:suffixText="TRY"
         app:suffixTextColor="@color/md_theme_light_onSurface">
 
         <com.google.android.material.textfield.TextInputEditText

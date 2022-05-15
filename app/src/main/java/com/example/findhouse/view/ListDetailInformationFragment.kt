@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.findhouse.R
 import com.example.findhouse.adapter.ListDetailInformationAdapter
@@ -33,6 +34,7 @@ class ListDetailInformationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Toast.makeText(requireContext(), houseListing.title, Toast.LENGTH_SHORT).show()
         binding = FragmentListDetailInformationBinding.inflate(inflater, container, false)
         binding.rwListDetail.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rwListDetail.adapter  =  ListDetailInformationAdapter(houseListing)

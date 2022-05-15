@@ -23,8 +23,6 @@ import com.example.findhouse.databinding.ListDetailFragmentBinding
 import com.example.findhouse.service.DatabaseService
 import com.example.findhouse.util.FirebaseResponse
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.database.collection.LLRBNode
-import com.google.type.Color
 
 class ListDetailViewFragment : Fragment() {
 
@@ -32,14 +30,14 @@ class ListDetailViewFragment : Fragment() {
     private lateinit var binding: ListDetailFragmentBinding
     private lateinit var houseListing: HouseListing
     private lateinit var databaseService: DatabaseService
-    private  var isFavorited = false
+    private  var isFavorite = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         position = arguments?.get("listPosition") as Int
         houseListing = Current.allListings[position]
         databaseService = DatabaseService()
-        isFavorited = Current.favoriteListings.contains(houseListing)
+        isFavorite = Current.favoriteListings.contains(houseListing)
     }
 
     override fun onCreateView(
@@ -50,7 +48,7 @@ class ListDetailViewFragment : Fragment() {
         binding = ListDetailFragmentBinding.inflate(inflater, container, false)
         binding.twDetailListingName.text = houseListing.title
 
-        if (isFavorited){
+        if (isFavorite){
             binding.topappbar.menu[0].iconTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.md_theme_light_error))
         }
 
@@ -73,11 +71,11 @@ class ListDetailViewFragment : Fragment() {
         binding.topappbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.favorite -> {
-                    if (!isFavorited){
+                    if (!isFavorite){
                         addToFavorites(menuItem)
+                    }else {
+                        Toast.makeText(requireContext(), "Already added.", Toast.LENGTH_SHORT)
                     }
-
-
                     true
                 }
                 else -> false

@@ -26,7 +26,7 @@ class MapsFragment : Fragment() {
 
     private val callback = OnMapReadyCallback { googleMap ->
         var markedLocation = LatLng(38.42, 27.14)
-        googleMap.addMarker(MarkerOptions().position(markedLocation).title("Marker in Sydney"))
+        googleMap.addMarker(MarkerOptions().position(markedLocation).title("Default Location"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(markedLocation))
         googleMap.setOnMapLongClickListener { listener->
             try {

@@ -44,13 +44,14 @@ class ListFilterFragment : Fragment() {
         val selectedUniversity =  Current.getUniversityByName(universityName)
         listings = DatabaseService().filterAndGetAllListings(selectedUniversity)
         observeList()
-        setupToolbar()
+        setupToolbar(universityName)
 
 
         return binding.root
     }
 
-    private fun setupToolbar() {
+    private fun setupToolbar( universityName: String) {
+        binding.toolbarFilterFragment.title = universityName
         binding.toolbarFilterFragment.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -100,7 +101,7 @@ class ListFilterFragment : Fragment() {
                         binding.rwFilteredList.let { rw ->
                             rw.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false )
                             rwAdapter = FilteredListingsRecyclerViewAdapter(list)
-                            rwAdapter.setOnItemClickListener(object: NewListingsRecyclerViewAdapter.onItemClickListener{
+                            rwAdapter.setOnItemClickListener(object: FilteredListingsRecyclerViewAdapter.onItemClickListener{
                                 override fun onItemClick(position: Int) {
                                     val findOriginalIndex = Current.allListings.indexOf(list[position] )
                                     val bundle = bundleOf("listPosition" to findOriginalIndex)
